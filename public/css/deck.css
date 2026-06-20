@@ -1,0 +1,189 @@
+@import url('dashboard.css');
+
+/* Deck Detail Header Styles */
+.deck-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.back-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.deck-title-block {
+    flex: 1;
+    min-width: 280px;
+}
+
+.deck-title-block h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.deck-desc-sub {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+.deck-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Flashcards Table Container */
+.cards-table-container {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.table-header-row {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-header-row h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Table Responsive wrapper */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Cards Table */
+.cards-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.cards-table th,
+.cards-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.cards-table th {
+    background-color: rgba(255, 255, 255, 0.02);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cards-table tbody tr {
+    transition: var(--transition);
+}
+
+.cards-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.015);
+}
+
+.cards-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.card-text-cell {
+    max-height: 80px;
+    overflow-y: auto;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.table-loading-cell {
+    text-align: center;
+    padding: 4rem !important;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Review Status Badges */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-badge.new {
+    background-color: var(--info-bg);
+    color: var(--info);
+}
+
+.status-badge.reviewing {
+    background-color: var(--warning-bg);
+    color: var(--warning);
+}
+
+.status-badge.mastered {
+    background-color: var(--success-bg);
+    color: var(--success);
+}
+
+/* Operations buttons inside table */
+.card-ops {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ops-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.ops-btn.edit {
+    color: var(--accent-secondary);
+    background-color: rgba(99, 102, 241, 0.1);
+}
+
+.ops-btn.edit:hover {
+    color: var(--text-primary);
+    background-color: var(--accent-primary);
+}
+
+.ops-btn.delete {
+    color: var(--danger);
+    background-color: var(--danger-bg);
+}
+
+.ops-btn.delete:hover {
+    color: var(--text-primary);
+    background-color: var(--danger);
+}

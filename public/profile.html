@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Cá Nhân - HustMemo</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+                <span class="logo-text">Hust<span>Memo</span></span>
+            </div>
+            <nav class="main-nav">
+                <a href="dashboard.html" class="nav-item" id="nav-dashboard-link"><i class="fa-solid fa-chart-simple"></i> Trang chủ</a>
+                <a href="library.html" class="nav-item" id="nav-library-link"><i class="fa-solid fa-book-open"></i> Thư viện</a>
+                <a href="analytics.html" class="nav-item" id="nav-analytics-link"><i class="fa-solid fa-chart-line"></i> Thống kê</a>
+                <a href="profile.html" class="nav-item active" id="nav-profile-link"><i class="fa-solid fa-user"></i> Cá nhân</a>
+            </nav>
+            <div class="user-profile-area" id="header-user-profile" style="display: none;">
+                <div class="user-info">
+                    <span class="user-name" id="header-username">Nguyễn Văn Hust</span>
+                    <span class="user-role">Học viên</span>
+                </div>
+                <div class="user-avatar" id="header-avatar-letter">H</div>
+                <button class="logout-btn" id="logout-btn" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="profile-layout-grid">
+                
+                <!-- Left Column: User Summary & Stats -->
+                <div class="profile-sidebar-card">
+                    <div class="user-big-avatar" id="profile-big-avatar">H</div>
+                    <h2 id="profile-fullname-display">Nguyễn Văn Hust</h2>
+                    <span class="user-username-tag" id="profile-username-display">@username</span>
+                    
+                    <div class="user-meta-list">
+                        <div class="meta-item">
+                            <span class="label"><i class="fa-solid fa-envelope"></i> Email:</span>
+                            <span class="value" id="profile-email-display">hust@hust.edu.vn</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats summary inside profile -->
+                    <div class="profile-stats-box">
+                        <div class="p-stat-item">
+                            <i class="fa-solid fa-folder icon-decks"></i>
+                            <div class="text">
+                                <span class="val" id="profile-decks-count">0</span>
+                                <span class="lbl">Bộ thẻ</span>
+                            </div>
+                        </div>
+                        <div class="p-stat-item">
+                            <i class="fa-solid fa-layer-group icon-cards"></i>
+                            <div class="text">
+                                <span class="val" id="profile-cards-count">0</span>
+                                <span class="lbl">Flashcards</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-danger btn-block" id="profile-logout-btn" style="margin-top: 1.5rem;">
+                        <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất tài khoản
+                    </button>
+                </div>
+
+                <!-- Right Column: Settings Form -->
+                <div class="settings-card">
+                    <h3><i class="fa-solid fa-user-gear"></i> Cấu hình tài khoản</h3>
+                    
+                    <!-- Alert Message -->
+                    <div id="settings-alert-msg" class="settings-alert" style="display: none;"></div>
+
+                    <!-- Profile Form -->
+                    <form id="profile-settings-form">
+                        <div class="form-row-group">
+                            <div class="form-group">
+                                <label for="profile-username-input">Tên đăng nhập (Không thể đổi)</label>
+                                <input type="text" id="profile-username-input" disabled style="background-color: var(--bg-primary); opacity: 0.5;">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-fullname-input">Họ và tên <span class="required">*</span></label>
+                                <input type="text" id="profile-fullname-input" required placeholder="Nhập họ tên đầy đủ">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profile-email-input">Email <span class="required">*</span></label>
+                            <input type="email" id="profile-email-input" required placeholder="Nhập email của bạn">
+                        </div>
+
+                        <!-- Change Password section -->
+                        <div class="password-change-divider">
+                            <span><i class="fa-solid fa-key"></i> Thay đổi mật khẩu (Không bắt buộc)</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profile-old-password-input">Mật khẩu cũ</label>
+                            <input type="password" id="profile-old-password-input" placeholder="Nhập mật khẩu cũ nếu muốn đổi mật khẩu">
+                        </div>
+
+                        <div class="form-row-group">
+                            <div class="form-group">
+                                <label for="profile-new-password-input">Mật khẩu mới</label>
+                                <input type="password" id="profile-new-password-input" placeholder="Mật khẩu mới (Tối thiểu 6 ký tự)">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-confirm-password-input">Xác nhận mật khẩu mới</label>
+                                <input type="password" id="profile-confirm-password-input" placeholder="Xác nhận lại mật khẩu mới">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="save-profile-btn" style="margin-top: 1rem; padding: 12px 24px;">
+                            <i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi cấu hình
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- AUTHENTICATION OVERLAY (Shown if NOT logged in) -->
+    <div class="auth-overlay" id="auth-overlay" style="display: none;">
+        <div class="auth-card">
+            <div class="auth-brand">
+                <div class="auth-logo"><i class="fa-solid fa-brain"></i></div>
+                <h2>Hust<span>Memo</span></h2>
+                <p>Học thông minh, ghi nhớ vượt trội</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login-btn">Đăng nhập</button>
+                <button class="auth-tab" id="tab-register-btn">Đăng ký</button>
+            </div>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-username"><i class="fa-solid fa-user"></i> Tên đăng nhập</label>
+                    <input type="text" id="login-username" placeholder="Nhập tên đăng nhập của bạn" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password"><i class="fa-solid fa-lock"></i> Mật khẩu</label>
+                    <input type="password" id="login-password" placeholder="Nhập mật khẩu" required autocomplete="current-password">
+                </div>
+                <div id="login-error-msg" class="auth-error-msg"></div>
+                <button type="submit" class="btn btn-primary btn-block">Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+            </form>
+
+            <form id="register-form" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="register-username"><i class="fa-solid fa-user"></i> Tên đăng nhập <span class="required">*</span></label>
+                    <input type="text" id="register-username" placeholder="Tên đăng nhập viết liền, không dấu" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="register-fullname"><i class="fa-solid fa-signature"></i> Họ và tên <span class="required">*</span></label>
+                    <input type="text" id="register-fullname" placeholder="Nhập họ và tên đầy đủ" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="register-email"><i class="fa-solid fa-envelope"></i> Email <span class="required">*</span></label>
+                    <input type="email" id="register-email" placeholder="Ví dụ: hust@hust.edu.vn" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="register-password"><i class="fa-solid fa-lock"></i> Mật khẩu <span class="required">*</span></label>
+                    <input type="password" id="register-password" placeholder="Tối thiểu 6 ký tự" required autocomplete="new-password">
+                </div>
+                <div id="register-error-msg" class="auth-error-msg"></div>
+                <button type="submit" class="btn btn-primary btn-block">Đăng ký tài khoản <i class="fa-solid fa-user-plus"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Client-side script -->
+    <script src="js/profile.js"></script>
+</body>
+</html>

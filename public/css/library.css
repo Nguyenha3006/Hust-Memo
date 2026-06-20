@@ -1,0 +1,83 @@
+@import url('dashboard.css');
+
+/* Library Header Styles */
+.library-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.0rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.25rem;
+}
+
+/* Wider modal for card previews */
+.preview-card-modal {
+    max-width: 640px !important;
+}
+
+.preview-deck-desc {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    margin-top: 4px;
+}
+
+/* Preview list scroller */
+.preview-cards-list-container {
+    margin: 1.5rem 0 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.25rem;
+}
+
+.preview-list-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.preview-cards-scroller {
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.preview-card-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 12px 16px;
+    background-color: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    align-items: center;
+}
+
+.preview-card-face-val {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.preview-card-face-val .face-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.preview-card-face-val .face-content {
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Divider inside card preview */
+.preview-card-item > div:first-child {
+    border-right: 1px solid var(--border-color);
+    padding-right: 15px;
+}

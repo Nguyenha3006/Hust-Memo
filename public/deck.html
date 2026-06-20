@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Thẻ - HustMemo</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/deck.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+                <span class="logo-text">Hust<span>Memo</span></span>
+            </div>
+            <nav class="main-nav">
+                <a href="dashboard.html" class="nav-item" id="nav-dashboard-link"><i class="fa-solid fa-chart-simple"></i> Trang chủ</a>
+                <a href="library.html" class="nav-item" id="nav-library-link"><i class="fa-solid fa-book-open"></i> Thư viện</a>
+                <a href="analytics.html" class="nav-item" id="nav-analytics-link"><i class="fa-solid fa-chart-line"></i> Thống kê</a>
+                <a href="profile.html" class="nav-item" id="nav-profile-link"><i class="fa-solid fa-user"></i> Cá nhân</a>
+            </nav>
+            <div class="user-profile-area" id="header-user-profile" style="display: none;">
+                <div class="user-info">
+                    <span class="user-name" id="header-username">Nguyễn Văn Hust</span>
+                    <span class="user-role">Học viên</span>
+                </div>
+                <div class="user-avatar" id="header-avatar-letter">H</div>
+                <button class="logout-btn" id="logout-btn" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Back Button and Title -->
+            <div class="deck-detail-header">
+                <a href="dashboard.html" class="btn btn-secondary back-btn"><i class="fa-solid fa-chevron-left"></i> Quay lại</a>
+                <div class="deck-title-block">
+                    <h1 id="deck-title-display">Đang tải bộ thẻ...</h1>
+                    <p id="deck-desc-display" class="deck-desc-sub"></p>
+                </div>
+                <div class="deck-header-actions">
+                    <a href="#" class="btn btn-primary" id="study-deck-now-btn" style="display: none;"><i class="fa-solid fa-graduation-cap"></i> Học bộ này</a>
+                    <button class="btn btn-success" id="open-create-card-btn"><i class="fa-solid fa-plus"></i> Thêm Flashcard</button>
+                </div>
+            </div>
+
+            <!-- Flashcards Table Card -->
+            <div class="cards-table-container">
+                <div class="table-header-row">
+                    <h3><i class="fa-solid fa-layer-group"></i> Danh sách Flashcards (<span id="cards-count-label">0</span>)</h3>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="cards-table" id="cards-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%">Mặt trước (Câu hỏi/Từ khóa)</th>
+                                <th style="width: 30%">Mặt sau (Đáp án/Giải nghĩa)</th>
+                                <th style="width: 10%" class="text-center">Hệ số dễ (EF)</th>
+                                <th style="width: 10%" class="text-center">Khoảng cách</th>
+                                <th style="width: 15%">Ngày ôn tiếp theo</th>
+                                <th style="width: 5%" class="text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cards-table-body">
+                            <!-- Loading Rows -->
+                            <tr>
+                                <td colspan="6" class="table-loading-cell">
+                                    <i class="fa-solid fa-circle-notch fa-spin"></i> Đang tải danh sách thẻ...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create/Edit Flashcard Modal -->
+    <div class="modal-overlay" id="card-modal" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="card-modal-title">Thêm Flashcard Mới</h3>
+                <button class="close-modal-btn" id="close-card-modal-btn">&times;</button>
+            </div>
+            <form id="card-form">
+                <input type="hidden" id="card-id-input" value="">
+                <div class="form-group">
+                    <label for="card-front-input">Mặt trước (Câu hỏi, từ khóa, hoặc khái niệm) <span class="required">*</span></label>
+                    <textarea id="card-front-input" rows="4" placeholder="Nhập nội dung ở mặt trước của thẻ ghi nhớ..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="card-back-input">Mặt sau (Câu trả lời, giải nghĩa, hoặc mô tả) <span class="required">*</span></label>
+                    <textarea id="card-back-input" rows="4" placeholder="Nhập nội dung ở mặt sau của thẻ ghi nhớ..." required></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-card-btn">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="save-card-btn">Lưu thẻ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- AUTHENTICATION OVERLAY (Shown if NOT logged in) -->
+    <div class="auth-overlay" id="auth-overlay" style="display: none;">
+        <div class="auth-card">
+            <div class="auth-brand">
+                <div class="auth-logo"><i class="fa-solid fa-brain"></i></div>
+                <h2>Hust<span>Memo</span></h2>
+                <p>Học thông minh, ghi nhớ vượt trội</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login-btn">Đăng nhập</button>
+                <button class="auth-tab" id="tab-register-btn">Đăng ký</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-username"><i class="fa-solid fa-user"></i> Tên đăng nhập</label>
+                    <input type="text" id="login-username" placeholder="Nhập tên đăng nhập của bạn" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password"><i class="fa-solid fa-lock"></i> Mật khẩu</label>
+                    <input type="password" id="login-password" placeholder="Nhập mật khẩu" required autocomplete="current-password">
+                </div>
+                <div id="login-error-msg" class="auth-error-msg"></div>
+                <button type="submit" class="btn btn-primary btn-block">Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="register-username"><i class="fa-solid fa-user"></i> Tên đăng nhập <span class="required">*</span></label>
+                    <input type="text" id="register-username" placeholder="Tên đăng nhập viết liền, không dấu" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="register-fullname"><i class="fa-solid fa-signature"></i> Họ và tên <span class="required">*</span></label>
+                    <input type="text" id="register-fullname" placeholder="Nhập họ và tên đầy đủ" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="register-email"><i class="fa-solid fa-envelope"></i> Email <span class="required">*</span></label>
+                    <input type="email" id="register-email" placeholder="Ví dụ: hust@hust.edu.vn" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="register-password"><i class="fa-solid fa-lock"></i> Mật khẩu <span class="required">*</span></label>
+                    <input type="password" id="register-password" placeholder="Tối thiểu 6 ký tự" required autocomplete="new-password">
+                </div>
+                <div id="register-error-msg" class="auth-error-msg"></div>
+                <button type="submit" class="btn btn-primary btn-block">Đăng ký tài khoản <i class="fa-solid fa-user-plus"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Client-side script -->
+    <script src="js/deck.js"></script>
+</body>
+</html>
