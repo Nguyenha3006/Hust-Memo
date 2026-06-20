@@ -1,0 +1,17 @@
+# Dependency directories
+node_modules/
+
+# Local sessions storage
+sessions/
+
+# Log files
+*.log
+npm-debug.log*
+
+# Environment variables (credentials, API keys)
+.env
+.env.local
+
+# IDE configurations
+.vscode/
+.idea/
